@@ -2,16 +2,14 @@
  * @Description: 
  * @Date: 2020-06-29 14:05:13
  * @LastEditors: Astronautics across the sea of stars
- * @LastEditTime: 2020-06-30 17:10:42
+ * @LastEditTime: 2020-07-01 17:20:04
 --> 
 <template>
   <div id="app">
     <router-view />
     <van-tabbar v-model="active" v-if="tab" @change="changeFu">
-      <van-tabbar-item icon="home-o">首页</van-tabbar-item>
-      <van-tabbar-item icon="search">热门</van-tabbar-item>
-      <van-tabbar-item icon="friends-o">推荐</van-tabbar-item>
-      <van-tabbar-item icon="setting-o">我的</van-tabbar-item>
+      <van-tabbar-item icon="home-o">推荐</van-tabbar-item>
+      <van-tabbar-item icon="search">我的</van-tabbar-item>
     </van-tabbar>
   </div>
 </template>
@@ -39,13 +37,15 @@ export default {
       if( this.active == 2 ){ this.$router.push({ path: "/", query: {} }); }
       if( this.active == 3 ){ this.$router.push({ path: "/", query: {} }); }
       router.beforeEach((to, from, next) => {
-        // console.log( to.name )
-        // console.log( this.tab )
-        if( to.name == 'home' || to.tab == 'about' ){
+        console.log( to.name )
+        if( to.name == 'home' || to.name == 'about' ){
           this.tab = true;
-        }else{
-          this.tab = false;
         }
+        else
+          this.tab = false;
+
+        
+        
         next();
       });
     }

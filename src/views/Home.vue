@@ -1,8 +1,8 @@
 <!--
- * @Description: 
+ * @Description: 首页推荐
  * @Date: 2020-06-29 14:09:01
  * @LastEditors: Astronautics across the sea of stars
- * @LastEditTime: 2020-06-30 18:19:36
+ * @LastEditTime: 2020-07-01 18:51:53
  :price="item.coupon_remain_quantity"
  :desc="item.goods_desc"
 --> 
@@ -13,6 +13,13 @@
         <van-icon name="search" size="18" />
       </template>
     </van-nav-bar>
+
+    <van-swipe class="my-swipe" :autoplay="3000" height="195" indicator-color="white">
+      <van-swipe-item v-for="(image, index) in images" :key="index">
+        <img v-lazy="image.image_url" @click="goFun(image)" />
+      </van-swipe-item>
+    </van-swipe>
+
     <van-tabs v-model="active" @change="activeFun" swipeable>
       <van-tab v-for="(item, index) in productList" :key="index" :title="item.desc">
         <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
@@ -31,11 +38,17 @@
                     {{ (item.min_group_price-item.coupon_discount)/100 }}
                   </b>
                   <b class="line_m">￥{{ item.min_group_price/100 }}</b>
-                  <van-tag type="danger" size="medium" class="line_discount">
+                  <van-tag
+                    type="danger"
+                    size="medium"
+                    class="line_discount"
+                    v-if="item.coupon_discount-0 > 0"
+                  >
                     <van-icon name="coupon" />
                     &nbsp;
                     {{ (item.coupon_discount/100) | toFixed(2) }}元
                   </van-tag>
+                  <van-tag size="medium" class="line_discount" v-else>无优惠券</van-tag>
                 </p>
               </template>
             </van-card>
@@ -43,8 +56,6 @@
         </van-list>
       </van-tab>
     </van-tabs>
-
-   
   </div>
 </template>
    
@@ -68,14 +79,37 @@ export default {
       list: [],
       loading: false,
       finished: false,
-      page: 0
+      page: 0,
+      images:[]
     };
   },
   computed: {},
   mounted: function() {
-    // this.info();
+    this.pdd_ddk_theme_list_get();
   },
   methods: {
+    /* 主题商品跳转 */ 
+    goFun( item ){
+      this.$router.push({
+        path: "/EventGoods",
+        query: { data: item }
+      });
+    },
+    /* 主题商品轮播图 */ 
+    pdd_ddk_theme_list_get(){
+      this.$axios({
+        method: "get",
+        url: this.$apis.pdd_ddk_theme_list_get,
+        data: {}
+      })
+        .then(response => {
+          if (response.status !== 200) {
+            return;
+          }
+          this.images = response.data.theme_list_get_response.theme_list;
+        })
+        .catch(error => {});
+    },
     onClickRight() {
       this.$router.push({
         path: "/Search",
@@ -88,10 +122,11 @@ export default {
         query: { goods_id: goods_id }
       });
     },
+    // 
     onLoad() {
       this.$axios({
         method: "get",
-        url: `http://10.0.2.49:3000/goods_recommend?limit=${20}&offset=${
+        url: `${this.$apis.goods_recommend}?limit=${20}&offset=${
           this.page
         }&type=${this.active >= 3 ? this.active + 1 : this.active}`,
         data: {}
@@ -151,6 +186,10 @@ export default {
   .line_tip {
     color: #999;
   }
-
+  .van-swipe__track{
+    img{
+      width: 100%;
+    }
+  }
 }
 </style>

@@ -2,7 +2,7 @@
  * @Description: 
  * @Date: 2020-06-29 14:09:01
  * @LastEditors: Astronautics across the sea of stars
- * @LastEditTime: 2020-06-30 17:16:27
+ * @LastEditTime: 2020-07-01 11:39:29
  */ 
 import Vue from 'vue'
 import Router from 'vue-router'
@@ -44,6 +44,18 @@ export default new Router({
       path: '/Search',
       name: 'Search',
       component: () => import('./views/Search.vue')
+    },
+    // 承载H5页面
+    {
+      path: '/EventPage',
+      name: 'EventPage',
+      component: () => import('./views/EventPage.vue')
+    },
+    // 活动商品列表
+    {
+      path: '/EventGoods',
+      name: 'EventGoods',
+      component: () => import('./views/EventGoods.vue')
     },
     
   ]
