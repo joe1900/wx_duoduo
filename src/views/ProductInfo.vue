@@ -2,7 +2,7 @@
  * @Description: 推荐商品详情
  * @Date: 2020-06-30 16:44:45
  * @LastEditors: Astronautics across the sea of stars
- * @LastEditTime: 2020-07-01 18:56:25
+ * @LastEditTime: 2020-07-02 10:09:02
 --> 
 
 <template>
@@ -91,7 +91,7 @@
       <template #tip>
         你的朋友可能也需要,立即 
         <Copy :content="`${data.goods_name} \n 【券后包邮价￥${(data.min_group_price-data.coupon_discount)/100}元】 \n ${url}`" @copyCallback="onClickEditAddress" style="display: inline-block;">
-          <span style="color: #1989fa;" > <van-icon name="orders-o" /> 点击分享 </span>
+          <span style="color: #1989fa;" > <van-icon name="orders-o" style="position: relative; top: 3px;" /> 点击分享 </span>
         </Copy> 
       </template>
     </van-submit-bar>

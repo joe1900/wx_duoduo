@@ -2,7 +2,7 @@
  * @Description: 热门
  * @Date: 2020-06-29 14:09:01
  * @LastEditors: Astronautics across the sea of stars
- * @LastEditTime: 2020-07-01 18:53:28
+ * @LastEditTime: 2020-07-02 09:54:07
 --> 
 <template>
   <div class="about">
@@ -160,7 +160,7 @@ export default {
 <style lang="less" scoped >
 .about {
   height: 100%;
-  padding-top: 45px;
+  padding-top: 55px;
   padding-bottom: 60px;
   .nav_ {
     position: fixed;
@@ -185,7 +185,11 @@ export default {
     height: 180px;
     margin-top: 0;
     overflow: hidden;
-    border-radius: 5px;
+    border-radius: 15px;
+    transition: all 0.5s;
+  }
+  >.van-image:active{
+    margin-left: 5%;
   }
   >p{
     margin: 0;

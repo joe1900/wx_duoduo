@@ -2,24 +2,24 @@
  * @Description: 搜索
  * @Date: 2020-06-30 17:14:41
  * @LastEditors: Astronautics across the sea of stars
- * @LastEditTime: 2020-07-01 18:57:09
+ * @LastEditTime: 2020-07-02 10:08:51
 --> 
 
 <template>
   <div class="search">
     <van-nav-bar title="搜索最低价" left-text="返回" class="nav_" left-arrow @click-left="onClickLeft" />
-    <p style="margin-bottom: 10px;" > <van-icon name="discount" style="position: relative; top: 2px;" /> 搜优惠，搜商品... </p>
+    <p style="margin-bottom: 10px;" > <van-icon name="discount" style="position: relative; top: 2px;" /> 搜优惠，搜商品， 意想不到的超低价... </p>
     <van-search
       id="top__" 
       v-model="value"
-      background="#4fc08d"
+      background="#ee0a23"
       show-action
       label="商品"
       placeholder="请输入搜索关键词"
       @search="onSearch"
     >
       <template #action>
-        <div @click="onSearch">搜索</div>
+        <div @click="onSearch" style="color:#fff">搜索 <van-icon name="search" style="position: relative; top: 3px;" /> </div>
       </template>
     </van-search>
 
@@ -58,7 +58,7 @@
     <van-button plain hairline block type="info" v-if="List_.length > 0" @click="addFun()" > 加载更多商品 </van-button>
 
     <div class="btnBox">
-      <van-button plain type="primary" size="small" v-for="(item, index) in goodsList" :key="index" @click="searchBtn(item.opt_name)"> {{ item.opt_name }} </van-button>
+      <van-button plain type="default" size="small" v-for="(item, index) in goodsList" :key="index" @click="searchBtn(item.opt_name)"> {{ item.opt_name }} </van-button>
     </div>
     
   </div>

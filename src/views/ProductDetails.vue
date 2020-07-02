@@ -2,7 +2,7 @@
  * @Description: 商品详情
  * @Date: 2020-06-29 15:54:39
  * @LastEditors: Astronautics across the sea of stars
- * @LastEditTime: 2020-07-01 18:55:23
+ * @LastEditTime: 2020-07-02 10:17:43
 --> 
 <template>
   <div class="ProductDetails">
@@ -92,11 +92,11 @@
     </template>
     <p class="desc_">没有更多了</p>
 
-    <van-submit-bar :price="data.min_group_price-data.coupon_discount" label="劵后：" button-text="立即领劵" @submit="subFun" >
+    <van-submit-bar :price="data.min_group_price-data.coupon_discount" label="劵后：" button-text="立即领劵" :loading="loading" @submit="subFun" >
       <template #tip>
         你的朋友可能也需要,立即 
         <Copy :content="`${data.goods_name} \n 【券后包邮价￥${(data.min_group_price-data.coupon_discount)/100}元】 \n ${url}`" @copyCallback="onClickEditAddress" style="display: inline-block;">
-          <span style="color: #1989fa;" > <van-icon name="orders-o" /> 点击分享 </span>
+          <span style="color: #1989fa;" > <van-icon name="orders-o" style="position: relative; top: 3px;" /> 点击分享 </span>
         </Copy> 
       </template>
     </van-submit-bar>
@@ -113,7 +113,8 @@ export default {
         goods_gallery_urls: []
       },
       list: [],
-      url: ''
+      url: '',
+      loading: true
     };
   },
   computed: {},
@@ -124,9 +125,12 @@ export default {
   methods: {
     /* 分享 */ 
     onClickEditAddress(){
-      this.$toast("Hi~ o(*￣▽￣*)ブ 已经复制到-剪切板，快去微信粘贴吧！");
+      this.$toast("Hi~ o(*￣▽￣*)ブ \n 已经复制到-剪切板，快去微信粘贴吧！");
     },
     subFun(){
+      if (this.url == '') {
+         this.$toast("Hi~ o(*￣▽￣*)ブ \n 优惠券还没准备好，请稍后重试");
+      }
       window.location.href = this.url;
     },
     qrcodeFun() {
@@ -140,6 +144,7 @@ export default {
             return;
           }
           this.url = response.data.goods_promotion_url_generate_response.goods_promotion_url_list[0].short_url;
+          this.loading = false;
         })
         .catch(error => {});
     },
@@ -160,8 +165,8 @@ export default {
             return;
           }
           this.data = response.data.goods_detail_response.goods_details[0];
-          this.onLoad();
           this.qrcodeFun();
+          this.onLoad();
         })
         .catch(error => {});
     },

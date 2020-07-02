@@ -2,7 +2,7 @@
  * @Description: 首页推荐
  * @Date: 2020-06-29 14:09:01
  * @LastEditors: Astronautics across the sea of stars
- * @LastEditTime: 2020-07-01 18:51:53
+ * @LastEditTime: 2020-07-02 09:55:16
  :price="item.coupon_remain_quantity"
  :desc="item.goods_desc"
 --> 
@@ -190,6 +190,9 @@ export default {
     img{
       width: 100%;
     }
+  }
+  .van-card:active{
+    background-color: #f0f0f0;
   }
 }
 </style>

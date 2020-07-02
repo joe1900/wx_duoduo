@@ -2,22 +2,20 @@
  * @Description: 
  * @Date: 2020-06-29 14:05:13
  * @LastEditors: Astronautics across the sea of stars
- * @LastEditTime: 2020-07-01 17:20:04
+ * @LastEditTime: 2020-07-02 09:51:28
 --> 
 <template>
   <div id="app">
     <router-view />
     <van-tabbar v-model="active" v-if="tab" @change="changeFu">
-      <van-tabbar-item icon="home-o">推荐</van-tabbar-item>
-      <van-tabbar-item icon="search">我的</van-tabbar-item>
+      <van-tabbar-item icon="shop-collect-o">推荐</van-tabbar-item>
+      <van-tabbar-item icon="fire-o">活动</van-tabbar-item>
     </van-tabbar>
   </div>
 </template>
 
 <script>
-import router from './router'
-
-
+import router from './router';
 export default {
   name: "",
   components: {},
@@ -28,24 +26,20 @@ export default {
     };
   },
   computed: {},
-  mounted: function() {},
+  mounted: function() {
+    if( window.location.href.indexOf('about') !== -1 ){ this.active = 1 }
+  },
   methods: {
     changeFu(){
-      // console.log( this.active );
+      
       if( this.active == 0 ){ this.$router.push({ path: "/", query: {} }); }
       if( this.active == 1 ){ this.$router.push({ path: "/about", query: {} }); }
-      if( this.active == 2 ){ this.$router.push({ path: "/", query: {} }); }
-      if( this.active == 3 ){ this.$router.push({ path: "/", query: {} }); }
+
       router.beforeEach((to, from, next) => {
-        console.log( to.name )
-        if( to.name == 'home' || to.name == 'about' ){
+        if( to.name == 'home' || to.name == 'about' )
           this.tab = true;
-        }
         else
           this.tab = false;
-
-        
-        
         next();
       });
     }
