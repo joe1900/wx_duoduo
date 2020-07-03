@@ -2,7 +2,7 @@
  * @Description: 热门
  * @Date: 2020-06-29 14:09:01
  * @LastEditors: Astronautics across the sea of stars
- * @LastEditTime: 2020-07-02 09:54:07
+ * @LastEditTime: 2020-07-03 10:21:07
 --> 
 <template>
   <div class="about">
@@ -70,7 +70,7 @@ export default {
           id: 2
         },
         {
-          img1: require("../assets/index4.jpg"),
+          img1: require("../assets/index3.jpg"),
           type: 2,
           name: '限时秒杀',
           id: 4
@@ -82,9 +82,9 @@ export default {
           id: 39997
         },
         {
-          img1: require("../assets/index3.jpg"),
+          img1: require("../assets/index4.jpg"),
           type: 1,
-          name: '我的专属商城',
+          name: '我的专属商城 / 个人中心',
           id: 4
         }
       ]
@@ -118,7 +118,9 @@ export default {
           this.url = response.data.cms_promotion_url_generate_response.url_list[0].url;
           window.location.href = this.url;
         })
-        .catch(error => {});
+        .catch(error => {
+          this.$toast(JSON.stringify(error));
+        });
     },
     info2(id) {
       // resource_url_gen
@@ -135,7 +137,9 @@ export default {
           this.url = response.data.resource_url_response.single_url_list.url
           window.location.href = this.url;
         })
-        .catch(error => {});
+        .catch(error => {
+          this.$toast(JSON.stringify(error));
+        });
     },
     htmlFun(url) {
       this.$axios({
@@ -149,7 +153,9 @@ export default {
           }
           this.html = response.data;
         })
-        .catch(error => {});
+        .catch(error => {
+            this.$toast(JSON.stringify(error));
+        });
     }
   },
   /* 离开当前组件时 */
@@ -177,29 +183,32 @@ export default {
     height: 100%;
   }
   >.event_{
-    
-    
-  >.van-image{
-    width: 95%;
-    margin-left: 2.5%;
-    height: 180px;
-    margin-top: 0;
-    overflow: hidden;
-    border-radius: 15px;
-    transition: all 0.5s;
+    display: inline-block;
+    width: 50%;
+    >.van-image{
+      width: 95%;
+      margin-left: 2.5%;
+      height: 90px;
+      margin-top: 0;
+      overflow: hidden;
+      border-radius: 5px;
+      transition: all 0.5s;
+    }
+    >.van-image:active{
+      margin-left: 5%;
+    }
+    >p{
+      margin: 0;
+      text-align: right;
+      padding-right: 10px;
+      position: relative;
+      top: -25px;
+      line-height: 0px;
+      color: #fff;
+    }
   }
-  >.van-image:active{
-    margin-left: 5%;
-  }
-  >p{
-    margin: 0;
-    text-align: right;
-    padding-right: 20px;
-    position: relative;
-    top: -25px;
-    line-height: 5px;
-    color: #fff;
-  }
+  >.event_:nth-child(8){
+    width: 100%;
   }
 
   

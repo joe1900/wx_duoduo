@@ -2,14 +2,18 @@
  * @Description: 
  * @Date: 2020-06-29 14:05:13
  * @LastEditors: Astronautics across the sea of stars
- * @LastEditTime: 2020-07-02 09:51:28
+ * @LastEditTime: 2020-07-03 10:25:29
 --> 
 <template>
   <div id="app">
-    <router-view />
+    <!-- <router-view v-if="!$route.meta.keepAlive"></router-view> -->
+    <keep-alive>
+      <router-view ></router-view>
+    </keep-alive>
     <van-tabbar v-model="active" v-if="tab" @change="changeFu">
-      <van-tabbar-item icon="shop-collect-o">推荐</van-tabbar-item>
-      <van-tabbar-item icon="fire-o">活动</van-tabbar-item>
+      <van-tabbar-item icon="shop-collect-o" to="/">推荐</van-tabbar-item>
+      <van-tabbar-item icon="flower-o" to="/Search">筛选</van-tabbar-item>
+      <van-tabbar-item icon="fire-o" to="/about">活动</van-tabbar-item>
     </van-tabbar>
   </div>
 </template>
@@ -27,16 +31,17 @@ export default {
   },
   computed: {},
   mounted: function() {
-    if( window.location.href.indexOf('about') !== -1 ){ this.active = 1 }
+    if( window.location.href.indexOf('about') !== -1 ){ this.active = 2 }
   },
   methods: {
     changeFu(){
       
-      if( this.active == 0 ){ this.$router.push({ path: "/", query: {} }); }
-      if( this.active == 1 ){ this.$router.push({ path: "/about", query: {} }); }
+      // if( this.active == 0 ){ this.$router.push({ path: "/", query: {} }); }
+      // if( this.active == 1 ){ this.$router.push({ path: "/Search", query: {} }); }
+      // if( this.active == 2 ){ this.$router.push({ path: "/about", query: {} }); }
 
       router.beforeEach((to, from, next) => {
-        if( to.name == 'home' || to.name == 'about' )
+        if( to.name == 'home' || to.name == 'Search' || to.name == 'about' )
           this.tab = true;
         else
           this.tab = false;

@@ -2,16 +2,16 @@
  * @Description: 首页推荐
  * @Date: 2020-06-29 14:09:01
  * @LastEditors: Astronautics across the sea of stars
- * @LastEditTime: 2020-07-02 09:55:16
+ * @LastEditTime: 2020-07-03 10:27:12
  :price="item.coupon_remain_quantity"
  :desc="item.goods_desc"
 --> 
 <template>
   <div class="home">
-    <van-nav-bar :title="productList[active].desc" class="nav_" @click-right="onClickRight">
-      <template #right>
-        <van-icon name="search" size="18" />
-      </template>
+    <van-nav-bar :title="productList[active].desc" class="nav_" >
+      <!-- <template #right>
+        <van-icon name="search" size="18" />@click-right="onClickRight"
+      </template> -->
     </van-nav-bar>
 
     <van-swipe class="my-swipe" :autoplay="3000" height="195" indicator-color="white">
@@ -37,7 +37,7 @@
                     <span>券后￥</span>
                     {{ (item.min_group_price-item.coupon_discount)/100 }}
                   </b>
-                  <b class="line_m">￥{{ item.min_group_price/100 }}</b>
+                  <i class="line_m">￥{{ item.min_group_price/100 }}</i>
                   <van-tag
                     type="danger"
                     size="medium"
@@ -108,7 +108,9 @@ export default {
           }
           this.images = response.data.theme_list_get_response.theme_list;
         })
-        .catch(error => {});
+        .catch(error => {
+          this.$toast(JSON.stringify(error));
+        });
     },
     onClickRight() {
       this.$router.push({
@@ -143,7 +145,9 @@ export default {
           }
           this.page++;
         })
-        .catch(error => {});
+        .catch(error => {
+          this.$toast(JSON.stringify(error));
+        });
     },
     activeFun(e) {
       this.list = [];

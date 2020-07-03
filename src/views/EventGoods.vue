@@ -2,7 +2,7 @@
  * @Description: 活动商品列表
  * @Date: 2020-07-01 11:37:34
  * @LastEditors: Astronautics across the sea of stars
- * @LastEditTime: 2020-07-01 18:53:48
+ * @LastEditTime: 2020-07-03 10:27:04
 --> 
 <template>
   <div class="EventGoods">
@@ -28,7 +28,7 @@
               <span>券后￥</span>
               {{ (item.min_group_price-item.coupon_discount)/100 }}
             </b>
-            <b class="line_m">￥{{ item.min_group_price/100 }}</b>
+            <i class="line_m">￥{{ item.min_group_price/100 }}</i>
             <van-tag
               type="danger"
               size="medium"
@@ -89,7 +89,9 @@ export default {
           }
           this.goodsList = response.data.theme_list_get_response.goods_list;
         })
-        .catch(error => {});
+        .catch(error => {
+          this.$toast(JSON.stringify(error));
+        });
     },
     onClickLeft() {
       this.$router.push({ path: "/", query: {} });

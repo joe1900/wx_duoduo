@@ -2,7 +2,7 @@
  * @Description: 
  * @Date: 2020-06-29 14:09:01
  * @LastEditors: Astronautics across the sea of stars
- * @LastEditTime: 2020-07-01 11:39:29
+ * @LastEditTime: 2020-07-03 09:47:53
  */ 
 import Vue from 'vue'
 import Router from 'vue-router'
@@ -16,7 +16,10 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: Home,
+      meta:{
+        keepAlive: true
+      }
     },
     // 热门
     {

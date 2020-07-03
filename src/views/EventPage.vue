@@ -2,7 +2,7 @@
  * @Description: 活动详情页 - 承载H5页面
  * @Date: 2020-07-01 11:12:15
  * @LastEditors: Astronautics across the sea of stars
- * @LastEditTime: 2020-07-01 11:26:10
+ * @LastEditTime: 2020-07-03 10:21:22
 --> 
 <template>
   <div class="eventpage">
@@ -34,7 +34,9 @@ export default {
           }
           console.log( response );
         })
-        .catch(error => {});
+        .catch(error => {
+          this.$toast(JSON.stringify(error));
+        });
     },
     onClickLeft() {
       this.$router.push({ path: "/", query: {  } });

@@ -2,12 +2,12 @@
  * @Description: 搜索
  * @Date: 2020-06-30 17:14:41
  * @LastEditors: Astronautics across the sea of stars
- * @LastEditTime: 2020-07-02 10:08:51
+ * @LastEditTime: 2020-07-03 10:26:44
 --> 
 
 <template>
   <div class="search">
-    <van-nav-bar title="搜索最低价" left-text="返回" class="nav_" left-arrow @click-left="onClickLeft" />
+    <van-nav-bar title="搜索最低价" class="nav_" @click-left="onClickLeft" />
     <p style="margin-bottom: 10px;" > <van-icon name="discount" style="position: relative; top: 2px;" /> 搜优惠，搜商品， 意想不到的超低价... </p>
     <van-search
       id="top__" 
@@ -37,8 +37,8 @@
               <span>券后￥</span>
               {{ (item.min_group_price-item.coupon_discount)/100 }}
             </b>
-            <b class="line_m">￥{{ item.min_group_price/100 }}</b>
-            {{ item.promotion_rate/100 }}%
+            <i class="line_m">￥{{ item.min_group_price/100 }}</i>
+            <!-- {{ item.promotion_rate/100 }}% -->
             <van-tag
               type="danger"
               size="medium"
@@ -77,8 +77,11 @@ export default {
     };
   },
   computed: {},
-  mounted: function() {
+  activated: function(){
     this.info();
+  },
+  mounted: function() {
+    // this.info();
   },
   methods: {
     infoFun(goods_id) {
@@ -106,7 +109,9 @@ export default {
           }
           this.List_.push(...response.data.goods_search_response.goods_list);
         })
-        .catch(error => {});
+        .catch(error => {
+          this.$toast(JSON.stringify(error));
+        });
     },
     info(){
       this.$axios({
@@ -120,10 +125,12 @@ export default {
           }
           this.goodsList = response.data.goods_opt_get_response.goods_opt_list;
         })
-        .catch(error => {});
+        .catch(error => {
+          this.$toast(JSON.stringify(error));
+        });
     },
     onClickLeft() {
-      this.$router.push({ path: "/", query: {} });
+      this.$router.go(-1);
     },
     searchBtn(text){
       this.List_ = [];
