@@ -2,7 +2,7 @@
  * @Description: 推荐商品详情
  * @Date: 2020-06-30 16:44:45
  * @LastEditors: Astronautics across the sea of stars
- * @LastEditTime: 2020-07-03 11:28:48
+ * @LastEditTime: 2020-07-03 11:53:00
 --> 
 
 <template>
@@ -271,7 +271,6 @@ export default {
     background-color: #C5CAE9;
     margin-top: 5px;
     margin-bottom: 15px;
-    //   border: dashed 2px chocolate;
     box-sizing: border-box;
     border-radius: 5px;
     overflow: hidden;

@@ -2,7 +2,7 @@
  * @Description: 首页推荐
  * @Date: 2020-06-29 14:09:01
  * @LastEditors: Astronautics across the sea of stars
- * @LastEditTime: 2020-07-03 10:27:12
+ * @LastEditTime: 2020-07-04 10:12:25
  :price="item.coupon_remain_quantity"
  :desc="item.goods_desc"
 --> 
@@ -90,6 +90,11 @@ export default {
   methods: {
     /* 主题商品跳转 */ 
     goFun( item ){
+      this.$toast.loading({
+        message: '加载中...',
+        forbidClick: true,
+        loadingType: 'spinner',
+      });
       this.$router.push({
         path: "/EventGoods",
         query: { data: item }

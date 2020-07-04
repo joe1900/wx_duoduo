@@ -2,7 +2,7 @@
  * @Description: 
  * @Date: 2020-06-29 14:05:13
  * @LastEditors: Astronautics across the sea of stars
- * @LastEditTime: 2020-07-03 10:25:29
+ * @LastEditTime: 2020-07-04 10:44:43
 --> 
 <template>
   <div id="app">
@@ -13,11 +13,11 @@
     <van-tabbar v-model="active" v-if="tab" @change="changeFu">
       <van-tabbar-item icon="shop-collect-o" to="/">推荐</van-tabbar-item>
       <van-tabbar-item icon="flower-o" to="/Search">筛选</van-tabbar-item>
-      <van-tabbar-item icon="fire-o" to="/about">活动</van-tabbar-item>
+      <van-tabbar-item icon="fire-o" to="/sellwell">热销</van-tabbar-item>
+      <van-tabbar-item icon="gift-card" to="/about">活动</van-tabbar-item>
     </van-tabbar>
   </div>
 </template>
-
 <script>
 import router from './router';
 export default {
@@ -41,7 +41,7 @@ export default {
       // if( this.active == 2 ){ this.$router.push({ path: "/about", query: {} }); }
 
       router.beforeEach((to, from, next) => {
-        if( to.name == 'home' || to.name == 'Search' || to.name == 'about' )
+        if( to.name == 'home' || to.name == 'Search' || to.name == 'sellwell' || to.name == 'about' )
           this.tab = true;
         else
           this.tab = false;

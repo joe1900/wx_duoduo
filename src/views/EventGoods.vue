@@ -2,7 +2,7 @@
  * @Description: 活动商品列表
  * @Date: 2020-07-01 11:37:34
  * @LastEditors: Astronautics across the sea of stars
- * @LastEditTime: 2020-07-03 10:27:04
+ * @LastEditTime: 2020-07-04 10:14:22
 --> 
 <template>
   <div class="EventGoods">
@@ -65,11 +65,11 @@ export default {
     };
   },
   computed: {},
-  mounted: function() {
-    // console.log(this.$route.query.data);
+  activated() {
     this.data = this.$route.query.data;
     this.info();
   },
+  mounted: function() {},
   methods: {
     infoFun(goods_id) {
       this.$router.push({
@@ -84,12 +84,14 @@ export default {
         data: {}
       })
         .then(response => {
+          this.$toast.clear();
           if (response.status !== 200) {
             return;
           }
           this.goodsList = response.data.theme_list_get_response.goods_list;
         })
         .catch(error => {
+          this.$toast.clear();
           this.$toast(JSON.stringify(error));
         });
     },

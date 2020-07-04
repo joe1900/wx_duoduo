@@ -1,45 +1,47 @@
 <!--
- * @Description: 活动详情页 - 承载H5页面
- * @Date: 2020-07-01 11:12:15
+ * @Description: 实时热销
+ * @Date: 2020-07-04 10:19:33
  * @LastEditors: Astronautics across the sea of stars
- * @LastEditTime: 2020-07-04 10:15:20
+ * @LastEditTime: 2020-07-04 14:26:21
 --> 
+
 <template>
-  <div class="eventpage">
-    <van-nav-bar title="优惠进行中" left-text="返回" class="nav_" left-arrow @click-left="onClickLeft" />
+  <div class="sellwell">
+    <van-nav-bar title="实时热销榜" class="nav_"></van-nav-bar>
   </div>
 </template>
    
 <script>
 export default {
-  name: "eventpage",
+  name: "sellwell",
   components: {},
   data() {
-    return {};
+    return {
+        data:[]
+    };
   },
   computed: {},
-  mounted: function() {
-      this.info();
+  activated: function() {
+    this.info();
   },
+  mounted: function() {},
   methods: {
     info() {
       this.$axios({
         method: "get",
-        url: `https://mobile.yangkeduo.com/duo_nine_nine.html?pid=10820525_145071056&cpsSign=CM_200701_10820525_145071056_279dbf50972bf4ece9c369e2e75693f4&duoduo_type=2`,
+        url: `${this.$apis.goods_list_query}?offset=0&limit=2`,
         data: {}
       })
         .then(response => {
           if (response.status !== 200) {
             return;
           }
+          this.data = response.data.top_goods_list_get_response.list;
         })
         .catch(error => {
           this.$toast(JSON.stringify(error));
         });
-    },
-    onClickLeft() {
-      this.$router.push({ path: "/", query: {  } });
-    },
+    }
   },
   /* 离开当前组件时 */
   destroyed: function() {}
@@ -47,7 +49,7 @@ export default {
 </script>
  
 <style lang="less" scoped >
-.eventpage {
+.sellwell {
   padding-top: 45px;
   .nav_ {
     position: fixed;

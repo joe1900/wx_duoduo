@@ -2,7 +2,7 @@
  * @Description: 
  * @Date: 2020-06-29 14:09:01
  * @LastEditors: Astronautics across the sea of stars
- * @LastEditTime: 2020-07-03 09:47:53
+ * @LastEditTime: 2020-07-04 10:25:02
  */ 
 import Vue from 'vue'
 import Router from 'vue-router'
@@ -59,6 +59,12 @@ export default new Router({
       path: '/EventGoods',
       name: 'EventGoods',
       component: () => import('./views/EventGoods.vue')
+    },
+    // 实时热销 sellwell
+    {
+      path: '/sellwell',
+      name: 'sellwell',
+      component: () => import('./views/SellWell.vue')
     },
     
   ]

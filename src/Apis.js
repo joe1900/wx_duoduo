@@ -2,10 +2,10 @@
  * @Description: apis
  * @Date: 2020-07-01 18:34:05
  * @LastEditors: Astronautics across the sea of stars
- * @LastEditTime: 2020-07-02 19:09:45
+ * @LastEditTime: 2020-07-04 11:22:46
  */
 
-let location_ = 'http://47.101.206.67:3030';
+let location_ = 'http://10.0.2.49:3000';
 
 export default {
     URL: {

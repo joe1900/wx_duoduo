@@ -2,7 +2,7 @@
  * @Description: 热门
  * @Date: 2020-06-29 14:09:01
  * @LastEditors: Astronautics across the sea of stars
- * @LastEditTime: 2020-07-03 10:21:07
+ * @LastEditTime: 2020-07-04 10:23:43
 --> 
 <template>
   <div class="about">
@@ -94,6 +94,11 @@ export default {
   mounted: function() {},
   methods: {
     goTo(item){
+      this.$toast.loading({
+        message: '加载中...',
+        forbidClick: true,
+        loadingType: 'spinner',
+      });
       if( item.type == 1 ){
         this.info(item.id);
       }
@@ -112,6 +117,7 @@ export default {
         data: {}
       })
         .then(response => {
+          this.$toast.clear();
           if (response.status !== 200) {
             return;
           }
@@ -131,6 +137,7 @@ export default {
         data: {}
       })
         .then(response => {
+          this.$toast.clear();
           if (response.status !== 200) {
             return;
           }
@@ -204,7 +211,7 @@ export default {
       position: relative;
       top: -25px;
       line-height: 0px;
-      color: #fff;
+      color: #000;
     }
   }
   >.event_:nth-child(8){
